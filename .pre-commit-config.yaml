@@ -1,0 +1,15 @@
+repos:
+  - repo: local
+    hooks:
+    - id: pylint
+      name: pylint
+      entry: poetry run pylint etl
+      language: python
+      types:
+        - python 
+    - id: black
+      name: black
+      entry: poetry run black etl
+      language: python
+      types:
+        - python 
