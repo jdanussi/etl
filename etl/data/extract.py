@@ -10,7 +10,7 @@ from etl.utils.db_config import config
 from etl import UTILS_DIR, RESOURCES_DIR  # porque existe __init__.py en etl/
 
 
-def get_data_from_database():
+def get_data_from_database(params, csv_out):
     """Docstring"""
 
     engine = create_engine(
@@ -23,13 +23,14 @@ def get_data_from_database():
         cols = records.keys()
         df = pd.DataFrame(records, columns=cols)
 
-    df.to_csv(csv_raw, encoding="utf-8", index=False)
+    df.to_csv(csv_out, encoding="utf-8", index=False)
+    return df
 
 
 if __name__ == "__main__":
 
-    csv_raw = os.path.join(RESOURCES_DIR, "ct_clientes_raw.csv")
     configuration_file = os.path.join(UTILS_DIR, "database.ini")
     params = config(filename=configuration_file, section="Argensun-Prueba")
+    csv_out = os.path.join(RESOURCES_DIR, "ct_clientes_raw.csv")
 
-    get_data_from_database()
+    get_data_from_database(params, csv_out)

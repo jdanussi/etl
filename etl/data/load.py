@@ -13,7 +13,7 @@ from etl import (
 from etl import UTILS_DIR, RESOURCES_DIR  # porque existe __init__.py en etl/
 
 
-def load_data_to_db():
+def load_data_to_database(df):
     """Docstring"""
 
     engine = create_engine(
@@ -21,8 +21,6 @@ def load_data_to_db():
     )
 
     metadata = MetaData(bind=engine)
-
-    df = pd.read_csv(csv_file)
 
     with engine.connect().execution_options(autocommit=True) as conn:
         ost_list_items_table = Table("ost_list_items", metadata, autoload_with=engine)
@@ -36,5 +34,6 @@ if __name__ == "__main__":
     csv_file = os.path.join(RESOURCES_DIR, "ct_clientes_transform.csv")
     configuration_file = os.path.join(UTILS_DIR, "database.ini")
     params = config(filename=configuration_file, section="ost_reclamos_dev")
-
-    load_data_to_db()
+    df = pd.read_csv(csv_file)
+    
+    load_data_to_database(df)
