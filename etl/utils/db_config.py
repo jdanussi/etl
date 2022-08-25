@@ -1,13 +1,7 @@
 # utils/db_config.py
 """ Docstring """
 
-# import os
 from configparser import ConfigParser
-
-# from etl.constants import UTILS_DIR
-# from etl import UTILS_DIR
-
-# configuration_file = os.path.join(UTILS_DIR, "database.ini")
 
 
 def config(filename="database.ini", section="foo"):
@@ -24,14 +18,14 @@ def config(filename="database.ini", section="foo"):
     parser.read(filename)
 
     # get section of database configuration file
-    db = {}
+    database = {}
     if parser.has_section(section):
         params = parser.items(section)
         for param in params:
-            db[param[0]] = param[1]
+            database[param[0]] = param[1]
     else:
         raise Exception(
             # "Section {0} not found in the {1} file".format(section, filename)
             f"Section {section} not found in the {filename} file"
         )
-    return db
+    return database
