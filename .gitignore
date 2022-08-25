@@ -1,2 +1,12 @@
 *.csv
-*.ini
+*.bak
+*pycache*
+etl/__pycache__
+etl/data/__pycache__
+etl/utils/__pycache__
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.pyc
+database_real.ini
